@@ -1,0 +1,21 @@
+{
+  "name": "file-manager",
+  "version": "1.0.0",
+  "description": "RSS NodeJS Course 2024Q1 Task 2",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ansivgit/node-file-manager.git"
+  },
+  "author": "Anna ZAS",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ansivgit/node-file-manager/issues"
+  },
+  "homepage": "https://github.com/ansivgit/node-file-manager#readme"
+}
