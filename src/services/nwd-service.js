@@ -14,6 +14,7 @@ export class Navigation {
   }
 
   async cd(pathToDir) {
+    //! добавить валидацию корректности переданного параметра (что не пустой)
     const newPath = path.resolve(this.currentPath, pathToDir);
     const isPathValid = await isPathExist(newPath).then((res) => res);
 
@@ -26,7 +27,7 @@ export class Navigation {
   }
 
   ls() {
-    fs.readdir(this.currentPath, {withFileTypes: true}, (err, files) => {
+    fs.readdir(this.currentPath, { withFileTypes: true }, (err, files) => {
       const data = listDirAdapter(files);
       console.table(data)
     });

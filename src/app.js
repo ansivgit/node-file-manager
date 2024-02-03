@@ -39,15 +39,16 @@ export class App {
   async ls() {
     this.#navigation = new Navigation(this.currentPath);
     await this.#navigation.ls();
-
-    return null;
   }
 
   async cat(args = '') {
-    this.#fileService = new FileService();
+    this.#fileService = new FileService(this.currentPath);
     await this.#fileService.cat(args);
+  }
 
-    return null;
+  async add(fileName = '') {
+    this.#fileService = new FileService(this.currentPath);
+    await this.#fileService.add(fileName);
   }
 
   async start() {
@@ -55,7 +56,6 @@ export class App {
 
     // this.#rl.prompt();
 
-    // TODO вынести колбек в отдельную функцию (перебор всех команд)
     this.#rl.on('line', async (line) => {
       await this.getHandler(line);
       getLocation(this.currentPath);
@@ -91,9 +91,13 @@ export class App {
         break;
 
       case 'cat':
-          const pathToFile = getArgs(line, command);
-          this.cat(pathToFile);
-          break;
+        const pathToFile = getArgs(line, command);
+        this.cat(pathToFile);
+        break;
+      case 'add':
+        const fileName = getArgs(line, command);
+        this.add(fileName);
+        break;
 
       case '.exit':
         this.exit();

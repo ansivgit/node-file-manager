@@ -1,3 +1,4 @@
-import { getParams, getLocation, isPathExist, getArgs, getCommand, listDirAdapter } from './helpers.js';
+import { getParams, getLocation, getArgs, getCommand, listDirAdapter } from './helpers.js';
+import { isPathExist, isFileExist } from './validation.js';
 
-export { getParams, getLocation, isPathExist, getArgs, getCommand, listDirAdapter };
+export { getParams, getLocation, getArgs, getCommand, listDirAdapter, isPathExist, isFileExist };
