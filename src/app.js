@@ -1,7 +1,7 @@
 import { createInterface } from 'readline';
 
 import { Navigation, FileService } from './services/index.js';
-import { getLocation, getArgs, getCommand } from './helpers/index.js';
+import { getLocation, getArgs, getParsedArgs, getCommand } from './helpers/index.js';
 import { MESSAGES } from './constants.js';
 
 export class App {
@@ -51,6 +51,26 @@ export class App {
     await this.#fileService.add(fileName);
   }
 
+  async rn(filePath = '', newFileName = '') {
+    this.#fileService = new FileService(this.currentPath);
+    await this.#fileService.rn(filePath, newFileName);
+  }
+
+  async cp(filePath = '', newPath = '') {
+    this.#fileService = new FileService(this.currentPath);
+    await this.#fileService.cp(filePath, newPath);
+  }
+
+  async mv(filePath = '', newPath = '') {
+    this.#fileService = new FileService(this.currentPath);
+    await this.#fileService.mv(filePath, newPath);
+  }
+
+  async rm(filePath) {
+    this.#fileService = new FileService(this.currentPath);
+    await this.#fileService.rm(filePath);
+  }
+
   async start() {
     getLocation(this.currentPath);
 
@@ -97,6 +117,26 @@ export class App {
       case 'add':
         const fileName = getArgs(line, command);
         this.add(fileName);
+        break;
+      case 'rn':
+        const rnArgs = getArgs(line, command);
+        const parsedRnArgs = getParsedArgs(rnArgs)
+        this.rn(...parsedRnArgs);
+        break;
+      case 'cp':
+        const cpArgs = getArgs(line, command);
+        const parsedCpArgs = getParsedArgs(cpArgs)
+        this.cp(...parsedCpArgs);
+        break;
+      case 'mv':
+        const mvArgs = getArgs(line, command);
+        const parsedMvArgs = getParsedArgs(mvArgs)
+        this.mv(...parsedMvArgs);
+        break;
+      case 'rm':
+        const rmArgs = getArgs(line, command);
+        const parsedRmArgs = getParsedArgs(rmArgs)
+        this.rm(...parsedRmArgs);
         break;
 
       case '.exit':
